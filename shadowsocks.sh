@@ -27,7 +27,7 @@ chmod +x /etc/init.d/shadowsocks-libev
 cp ./debian/shadowsocks-libev.default /etc/default/shadowsocks-libev
 
 # 修改配置文件
-CONFIG_FILE="/etc/shadowsocks-libev/config.json"
+CONFIG_FILE="/etc/default/shadowsocks-libev/config.json"
 cat <<EOF >$CONFIG_FILE
 {
     "server":"0.0.0.0",
