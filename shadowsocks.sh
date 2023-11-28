@@ -16,7 +16,7 @@ sudo snap install core
 sudo snap install shadowsocks-libev
 
 #写入配置文件
-cat > /snap/bin/config.json <<EOL
+cat > /snap/shadowsocks-libev/config.json <<EOL
 {
   "server": "0.0.0.0",
   "server_port": 1,
@@ -36,7 +36,7 @@ After=network.target
 
 [Service]
 Restart=on-abnormal
-ExecStart=/snap/bin/shadowsocks-libev.ss-server -c /snap/bin/config.json
+ExecStart=/snap/bin/shadowsocks-libev.ss-server -c /snap/shadowsocks-libev/config.json
 
 [Install]
 WantedBy=multi-user.target
