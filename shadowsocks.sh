@@ -11,7 +11,7 @@ apt update
 apt upgrade -y
 
 # 安装依赖
-apt install -y wget git build-essential autoconf libtool libssl-dev
+apt-get install -y gettext build-essential autoconf libtool libpcre3-dev asciidoc xmlto libev-dev libc-ares-dev automake
 
 # 下载并安装Shadowsocks-libev
 git clone https://github.com/shadowsocks/shadowsocks-libev.git
