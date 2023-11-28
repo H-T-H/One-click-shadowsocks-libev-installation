@@ -42,4 +42,4 @@ ExecStart=/snap/bin/shadowsocks-libev.ss-server -c /snap/shadowsocks-libev/confi
 WantedBy=multi-user.target
 EOL
 
-
+systemctl start ss
