@@ -43,6 +43,3 @@ WantedBy=multi-user.target
 EOL
 
 
-
-
-echo "Shadowsocks-libev安装完成，配置文件位于 /etc/shadowsocks-libev/config.json"
