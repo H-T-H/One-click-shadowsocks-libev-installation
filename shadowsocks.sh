@@ -11,7 +11,7 @@ apt update
 apt upgrade -y
 
 # 安装依赖
-apt-get install -y gettext build-essential autoconf libtool libpcre3-dev asciidoc xmlto libev-dev libc-ares-dev automake
+apt-get install -y gettext build-essential unzip gzip python python-dev python-setuptools curl openssl libssl-dev autoconf automake libtool gcc make perl cpio libpcre3 libpcre3-dev zlib1g-dev libev-dev libc-ares-dev git qrencode
 
 # 运行autoreconf
 autoreconf -i
