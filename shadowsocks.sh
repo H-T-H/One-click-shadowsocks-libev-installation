@@ -11,7 +11,7 @@ apt update
 apt upgrade -y
 
 # 安装shadowsocks libev
-sudo apt-get install shadowsocks-libev
+sudo apt-get install shadowsocks-libev -y
 
 #写入配置文件
 cat > /etc/shadowsocks-libev/config.json <<EOL
