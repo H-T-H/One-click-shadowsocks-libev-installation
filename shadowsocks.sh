@@ -6,17 +6,15 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-# 更新系统安装snap
+# 更新系统
 apt update
 apt upgrade -y
-sudo apt install snapd -y
-sudo snap install core
 
 # 安装shadowsocks libev
-sudo snap install shadowsocks-libev
+sudo apt-get install shadowsocks-libev
 
 #写入配置文件
-cat > /snap/shadowsocks-libev/config.json <<EOL
+cat > /etc/shadowsocks-libev/config.json <<EOL
 {
   "server": "0.0.0.0",
   "server_port": 1,
@@ -28,18 +26,5 @@ cat > /snap/shadowsocks-libev/config.json <<EOL
 }
 EOL
 
-# 设置开机自启动
-cat > /etc/systemd/system/ss.service <<EOL
-[Unit]
-Description=Shadowsocks Server
-After=network.target
-
-[Service]
-Restart=on-abnormal
-ExecStart=/snap/bin/shadowsocks-libev.ss-server -c /snap/shadowsocks-libev/config.json
-
-[Install]
-WantedBy=multi-user.target
-EOL
-
-systemctl start ss
+#重新启动
+sudo systemctl restart shadowsocks-libev
