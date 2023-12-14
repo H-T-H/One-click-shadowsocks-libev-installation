@@ -26,25 +26,28 @@ cat > /etc/shadowsocks-libev/config.json <<EOL
 }
 EOL
 
-#重新启动
-sudo systemctl restart shadowsocks-libev
-
-#开启debian的bbr拥堵算法
-# 检查当前TCP拥塞控制算法
-current_algo=$(sysctl net.ipv4.tcp_congestion_control | awk '{print $3}')
-
 # 如果当前算法不是BBR，则启用BBR
 if [ "$current_algo" != "bbr" ]; then
     echo "BBR未启用，正在启用BBR..."
-    
-    # 将BBR配置添加到sysctl.conf
-    echo "net.core.default_qdisc=fq" | sudo tee -a /etc/sysctl.conf
-    echo "net.ipv4.tcp_congestion_control=bbr" | sudo tee -a /etc/sysctl.conf
+
+    # 检查并更新net.core.default_qdisc
+    if grep -q "net.core.default_qdisc" /etc/sysctl.conf; then
+        sudo sed -i 's/^net.core.default_qdisc=.*/net.core.default_qdisc=fq/' /etc/sysctl.conf
+    else
+        echo "net.core.default_qdisc=fq" | sudo tee -a /etc/sysctl.conf
+    fi
+
+    # 检查并更新net.ipv4.tcp_congestion_control
+    if grep -q "net.ipv4.tcp_congestion_control" /etc/sysctl.conf; then
+        sudo sed -i 's/^net.ipv4.tcp_congestion_control=.*/net.ipv4.tcp_congestion_control=bbr/' /etc/sysctl.conf
+    else
+        echo "net.ipv4.tcp_congestion_control=bbr" | sudo tee -a /etc/sysctl.conf
+    fi
 
     # 应用更改
     sudo sysctl -p
 
-    echo "以为你启用BBR。"
+    echo "BBR已启用。"
 else
     echo "BBR已经启用。"
 fi
