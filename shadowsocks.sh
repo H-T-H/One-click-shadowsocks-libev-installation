@@ -6,9 +6,6 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-# 更新系统
-apt update
-apt upgrade -y
 
 # 安装shadowsocks libev
 sudo apt-get install shadowsocks-libev -y
