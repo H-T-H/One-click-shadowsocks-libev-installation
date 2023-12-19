@@ -23,6 +23,8 @@ cat > /etc/shadowsocks-libev/config.json <<EOL
 }
 EOL
 
+sudo systemctl restart shadowsocks-libev
+
 # 如果当前算法不是BBR，则启用BBR
 if [ "$current_algo" != "bbr" ]; then
     echo "BBR未启用，正在启用BBR..."
